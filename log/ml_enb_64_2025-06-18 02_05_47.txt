@@ -1,0 +1,65 @@
+2025-06-18 02:07:31.514 | INFO     | __main__:<module>:102 - Namespace(embedding_size=64, reg_weight=0.001, log_reg=0.005, layers=2, layer_num=3, node_dropout=0.75, message_dropout=0.25, omega=1, data_name='ml', behaviors=['neutral', 'neg', 'pos'], loss_type='bpr', neg_count=4, if_load_model=False, gpu_no=1, topk=[10, 20, 50, 80], metrics=['hit', 'ndcg'], lr=0.001, decay=0.0, batch_size=1024, test_batch_size=1024, min_epoch=5, epochs=200, model_path='./check_point', check_point='', model_name='ml', device='cuda:2', data_path='./data/ML10M', TIME='2025-06-18 02_06_10')
+2025-06-18 02:07:31.514 | INFO     | __main__:<module>:103 - BIPN(
+  (message_dropout): Dropout(p=0.25, inplace=False)
+  (user_embedding): Embedding(67789, 64, padding_idx=0)
+  (item_embedding): Embedding(8705, 64, padding_idx=0)
+  (global_Graph): LightGCN()
+  (behavior_Graph_list): ModuleList(
+    (0-2): 3 x LightGCN()
+  )
+  (transformer): LinearTransformer(
+    (trans_conv): TransConv(
+      (convs): ModuleList(
+        (0): TransConvLayer(
+          (Wk): Linear(in_features=64, out_features=64, bias=True)
+          (Wq): Linear(in_features=64, out_features=64, bias=True)
+        )
+      )
+      (fcs): ModuleList(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (bns): ModuleList(
+        (0-1): 2 x LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (fc): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (gate_layer): Linear(in_features=128, out_features=64, bias=True)
+  (W_q): Linear(in_features=64, out_features=64, bias=False)
+  (W_k): Linear(in_features=64, out_features=64, bias=False)
+  (W_v): Linear(in_features=64, out_features=64, bias=False)
+  (out_proj): Linear(in_features=64, out_features=64, bias=True)
+  (gate_linear_att): Linear(in_features=64, out_features=64, bias=True)
+  (layernorm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (pre_dis_layer): GraphDistillationLayer(
+    (phi): ModuleList(
+      (0-2): 3 x Linear(in_features=128, out_features=64, bias=True)
+    )
+  )
+  (RZ): Linear(in_features=128, out_features=128, bias=True)
+  (U): Linear(in_features=128, out_features=64, bias=True)
+  (bpr_loss): BPRLoss()
+  (emb_loss): EmbLoss()
+  (cross_loss): BCELoss()
+)
+2025-06-18 09:19:55.615 | INFO     | trainer:_train_one_epoch:119 - epoch 1 25944.10s Train loss is [0.0876] 
+2025-06-18 09:20:19.416 | INFO     | trainer:_train_one_epoch:127 - validate 1 cost time 23.80s, result: {'hit@10': np.float64(0.0063), 'ndcg@10': np.float64(0.003), 'hit@20': np.float64(0.0104), 'ndcg@20': np.float64(0.004), 'hit@50': np.float64(0.0223), 'ndcg@50': np.float64(0.0063), 'hit@80': np.float64(0.0311), 'ndcg@80': np.float64(0.0078)} 
+2025-06-18 09:20:22.664 | INFO     | trainer:_train_one_epoch:135 - test 1 cost time 3.25s, result: {'hit@10': np.float64(0.0895), 'ndcg@10': np.float64(0.0424), 'hit@20': np.float64(0.1494), 'ndcg@20': np.float64(0.0575), 'hit@50': np.float64(0.2817), 'ndcg@50': np.float64(0.0834), 'hit@80': np.float64(0.3788), 'ndcg@80': np.float64(0.0996)} 
+2025-06-18 16:28:01.687 | INFO     | trainer:_train_one_epoch:119 - epoch 2 25659.02s Train loss is [0.0519] 
+2025-06-18 16:28:25.628 | INFO     | trainer:_train_one_epoch:127 - validate 2 cost time 23.94s, result: {'hit@10': np.float64(0.006), 'ndcg@10': np.float64(0.0027), 'hit@20': np.float64(0.0115), 'ndcg@20': np.float64(0.004), 'hit@50': np.float64(0.0239), 'ndcg@50': np.float64(0.0065), 'hit@80': np.float64(0.0326), 'ndcg@80': np.float64(0.0079)} 
+2025-06-18 16:28:28.812 | INFO     | trainer:_train_one_epoch:135 - test 2 cost time 3.18s, result: {'hit@10': np.float64(0.0835), 'ndcg@10': np.float64(0.04), 'hit@20': np.float64(0.1484), 'ndcg@20': np.float64(0.0563), 'hit@50': np.float64(0.2894), 'ndcg@50': np.float64(0.0841), 'hit@80': np.float64(0.3889), 'ndcg@80': np.float64(0.1006)} 
+2025-06-18 23:17:53.009 | INFO     | trainer:_train_one_epoch:119 - epoch 3 24564.20s Train loss is [0.0449] 
+2025-06-18 23:18:17.086 | INFO     | trainer:_train_one_epoch:127 - validate 3 cost time 24.08s, result: {'hit@10': np.float64(0.0047), 'ndcg@10': np.float64(0.0022), 'hit@20': np.float64(0.0098), 'ndcg@20': np.float64(0.0035), 'hit@50': np.float64(0.0227), 'ndcg@50': np.float64(0.006), 'hit@80': np.float64(0.0313), 'ndcg@80': np.float64(0.0074)} 
+2025-06-18 23:18:20.301 | INFO     | trainer:_train_one_epoch:135 - test 3 cost time 3.21s, result: {'hit@10': np.float64(0.079), 'ndcg@10': np.float64(0.037), 'hit@20': np.float64(0.1437), 'ndcg@20': np.float64(0.0531), 'hit@50': np.float64(0.29), 'ndcg@50': np.float64(0.082), 'hit@80': np.float64(0.3823), 'ndcg@80': np.float64(0.0974)} 
+2025-06-19 06:07:27.209 | INFO     | trainer:_train_one_epoch:119 - epoch 4 24546.91s Train loss is [0.0416] 
+2025-06-19 06:07:51.127 | INFO     | trainer:_train_one_epoch:127 - validate 4 cost time 23.92s, result: {'hit@10': np.float64(0.0058), 'ndcg@10': np.float64(0.0025), 'hit@20': np.float64(0.0111), 'ndcg@20': np.float64(0.0039), 'hit@50': np.float64(0.0224), 'ndcg@50': np.float64(0.0061), 'hit@80': np.float64(0.031), 'ndcg@80': np.float64(0.0075)} 
+2025-06-19 06:07:54.257 | INFO     | trainer:_train_one_epoch:135 - test 4 cost time 3.13s, result: {'hit@10': np.float64(0.0806), 'ndcg@10': np.float64(0.0378), 'hit@20': np.float64(0.1451), 'ndcg@20': np.float64(0.0539), 'hit@50': np.float64(0.2892), 'ndcg@50': np.float64(0.0823), 'hit@80': np.float64(0.3822), 'ndcg@80': np.float64(0.0978)} 
+2025-06-19 13:24:54.257 | INFO     | trainer:_train_one_epoch:119 - epoch 5 26220.00s Train loss is [0.0399] 
+2025-06-19 13:25:25.024 | INFO     | trainer:_train_one_epoch:127 - validate 5 cost time 30.77s, result: {'hit@10': np.float64(0.0055), 'ndcg@10': np.float64(0.0026), 'hit@20': np.float64(0.0111), 'ndcg@20': np.float64(0.004), 'hit@50': np.float64(0.0235), 'ndcg@50': np.float64(0.0064), 'hit@80': np.float64(0.0324), 'ndcg@80': np.float64(0.0079)} 
+2025-06-19 13:25:29.207 | INFO     | trainer:_train_one_epoch:135 - test 5 cost time 4.18s, result: {'hit@10': np.float64(0.0792), 'ndcg@10': np.float64(0.0374), 'hit@20': np.float64(0.1424), 'ndcg@20': np.float64(0.0533), 'hit@50': np.float64(0.2884), 'ndcg@50': np.float64(0.082), 'hit@80': np.float64(0.3802), 'ndcg@80': np.float64(0.0972)} 
+2025-06-19 20:54:52.958 | INFO     | trainer:_train_one_epoch:119 - epoch 6 26963.75s Train loss is [0.0388] 
+2025-06-19 20:55:17.398 | INFO     | trainer:_train_one_epoch:127 - validate 6 cost time 24.44s, result: {'hit@10': np.float64(0.0054), 'ndcg@10': np.float64(0.0026), 'hit@20': np.float64(0.0108), 'ndcg@20': np.float64(0.0039), 'hit@50': np.float64(0.0232), 'ndcg@50': np.float64(0.0064), 'hit@80': np.float64(0.0322), 'ndcg@80': np.float64(0.0079)} 
+2025-06-19 20:55:20.675 | INFO     | trainer:_train_one_epoch:135 - test 6 cost time 3.28s, result: {'hit@10': np.float64(0.0814), 'ndcg@10': np.float64(0.0377), 'hit@20': np.float64(0.1396), 'ndcg@20': np.float64(0.0524), 'hit@50': np.float64(0.2859), 'ndcg@50': np.float64(0.0812), 'hit@80': np.float64(0.3801), 'ndcg@80': np.float64(0.0969)} 
+2025-06-19 20:55:20.676 | INFO     | trainer:train_model:88 - training end, best iteration 1, results: {'hit@10': np.float64(0.0063), 'ndcg@10': np.float64(0.003), 'hit@20': np.float64(0.0104), 'ndcg@20': np.float64(0.004), 'hit@50': np.float64(0.0223), 'ndcg@50': np.float64(0.0063), 'hit@80': np.float64(0.0311), 'ndcg@80': np.float64(0.0078)}
+2025-06-19 20:55:20.676 | INFO     | trainer:train_model:91 - final test result is:  {'hit@10': np.float64(0.0895), 'ndcg@10': np.float64(0.0424), 'hit@20': np.float64(0.1494), 'ndcg@20': np.float64(0.0575), 'hit@50': np.float64(0.2817), 'ndcg@50': np.float64(0.0834), 'hit@80': np.float64(0.3788), 'ndcg@80': np.float64(0.0996)}
+2025-06-19 20:55:20.676 | INFO     | __main__:<module>:107 - train end total cost time: 154149.9131617546

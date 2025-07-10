@@ -1,0 +1,74 @@
+2025-05-30 09:35:27.656 | INFO     | __main__:<module>:102 - Namespace(embedding_size=64, reg_weight=0.005, log_reg=0.05, layers=2, layer_num=3, node_dropout=0.75, message_dropout=0.25, omega=1, data_name='yelp', behaviors=['tip', 'neutral', 'neg', 'pos'], loss_type='bpr', neg_count=4, if_load_model=False, gpu_no=1, topk=[10, 20, 50, 80], metrics=['hit', 'ndcg'], lr=0.001, decay=0.0, batch_size=1024, test_batch_size=1024, min_epoch=5, epochs=200, model_path='./check_point', check_point='', model_name='yelp', device='cuda:4', data_path='./data/Yelp', TIME='2025-05-30 09_35_11')
+2025-05-30 09:35:27.657 | INFO     | __main__:<module>:103 - BIPN(
+  (message_dropout): Dropout(p=0.25, inplace=False)
+  (user_embedding): Embedding(19801, 64, padding_idx=0)
+  (item_embedding): Embedding(22735, 64, padding_idx=0)
+  (global_Graph): LightGCN()
+  (behavior_Graph_list): ModuleList(
+    (0-3): 4 x LightGCN()
+  )
+  (transformer): LinearTransformer(
+    (trans_conv): TransConv(
+      (convs): ModuleList(
+        (0): TransConvLayer(
+          (Wk): Linear(in_features=64, out_features=64, bias=True)
+          (Wq): Linear(in_features=64, out_features=64, bias=True)
+        )
+      )
+      (fcs): ModuleList(
+        (0): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (bns): ModuleList(
+        (0-1): 2 x LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (fc): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (gate_layer): Linear(in_features=128, out_features=64, bias=True)
+  (W_q): Linear(in_features=64, out_features=64, bias=False)
+  (W_k): Linear(in_features=64, out_features=64, bias=False)
+  (W_v): Linear(in_features=64, out_features=64, bias=False)
+  (out_proj): Linear(in_features=64, out_features=64, bias=True)
+  (gate_linear_att): Linear(in_features=64, out_features=64, bias=True)
+  (layernorm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+  (pre_dis_layer): GraphDistillationLayer(
+    (phi): ModuleList(
+      (0-3): 4 x Linear(in_features=128, out_features=64, bias=True)
+    )
+  )
+  (RZ): Linear(in_features=128, out_features=128, bias=True)
+  (U): Linear(in_features=128, out_features=64, bias=True)
+  (bpr_loss): BPRLoss()
+  (emb_loss): EmbLoss()
+  (cross_loss): BCELoss()
+)
+2025-05-30 09:53:54.899 | INFO     | trainer:_train_one_epoch:119 - epoch 1 1107.24s Train loss is [0.1675] 
+2025-05-30 09:54:06.231 | INFO     | trainer:_train_one_epoch:127 - validate 1 cost time 11.33s, result: {'hit@10': np.float64(0.0032), 'ndcg@10': np.float64(0.0015), 'hit@20': np.float64(0.0059), 'ndcg@20': np.float64(0.0021), 'hit@50': np.float64(0.0145), 'ndcg@50': np.float64(0.0038), 'hit@80': np.float64(0.0232), 'ndcg@80': np.float64(0.0052)} 
+2025-05-30 09:54:11.847 | INFO     | trainer:_train_one_epoch:135 - test 1 cost time 5.62s, result: {'hit@10': np.float64(0.047), 'ndcg@10': np.float64(0.0231), 'hit@20': np.float64(0.0808), 'ndcg@20': np.float64(0.0315), 'hit@50': np.float64(0.1528), 'ndcg@50': np.float64(0.0458), 'hit@80': np.float64(0.2117), 'ndcg@80': np.float64(0.0556)} 
+2025-05-30 10:12:16.849 | INFO     | trainer:_train_one_epoch:119 - epoch 2 1085.00s Train loss is [0.0895] 
+2025-05-30 10:12:28.814 | INFO     | trainer:_train_one_epoch:127 - validate 2 cost time 11.96s, result: {'hit@10': np.float64(0.0055), 'ndcg@10': np.float64(0.0027), 'hit@20': np.float64(0.0109), 'ndcg@20': np.float64(0.004), 'hit@50': np.float64(0.0232), 'ndcg@50': np.float64(0.0064), 'hit@80': np.float64(0.0331), 'ndcg@80': np.float64(0.0081)} 
+2025-05-30 10:12:34.880 | INFO     | trainer:_train_one_epoch:135 - test 2 cost time 6.07s, result: {'hit@10': np.float64(0.0531), 'ndcg@10': np.float64(0.0262), 'hit@20': np.float64(0.0909), 'ndcg@20': np.float64(0.0357), 'hit@50': np.float64(0.1695), 'ndcg@50': np.float64(0.0511), 'hit@80': np.float64(0.2267), 'ndcg@80': np.float64(0.0606)} 
+2025-05-30 10:30:48.727 | INFO     | trainer:_train_one_epoch:119 - epoch 3 1093.85s Train loss is [0.0772] 
+2025-05-30 10:31:00.095 | INFO     | trainer:_train_one_epoch:127 - validate 3 cost time 11.37s, result: {'hit@10': np.float64(0.007), 'ndcg@10': np.float64(0.0032), 'hit@20': np.float64(0.0124), 'ndcg@20': np.float64(0.0045), 'hit@50': np.float64(0.0261), 'ndcg@50': np.float64(0.0072), 'hit@80': np.float64(0.0371), 'ndcg@80': np.float64(0.0091)} 
+2025-05-30 10:31:05.798 | INFO     | trainer:_train_one_epoch:135 - test 3 cost time 5.70s, result: {'hit@10': np.float64(0.0524), 'ndcg@10': np.float64(0.0258), 'hit@20': np.float64(0.0901), 'ndcg@20': np.float64(0.0353), 'hit@50': np.float64(0.1686), 'ndcg@50': np.float64(0.0508), 'hit@80': np.float64(0.2284), 'ndcg@80': np.float64(0.0607)} 
+2025-05-30 10:49:05.746 | INFO     | trainer:_train_one_epoch:119 - epoch 4 1079.95s Train loss is [0.0704] 
+2025-05-30 10:49:17.126 | INFO     | trainer:_train_one_epoch:127 - validate 4 cost time 11.38s, result: {'hit@10': np.float64(0.0077), 'ndcg@10': np.float64(0.0034), 'hit@20': np.float64(0.0124), 'ndcg@20': np.float64(0.0045), 'hit@50': np.float64(0.0273), 'ndcg@50': np.float64(0.0075), 'hit@80': np.float64(0.0415), 'ndcg@80': np.float64(0.0098)} 
+2025-05-30 10:49:22.495 | INFO     | trainer:_train_one_epoch:135 - test 4 cost time 5.37s, result: {'hit@10': np.float64(0.0583), 'ndcg@10': np.float64(0.0282), 'hit@20': np.float64(0.0947), 'ndcg@20': np.float64(0.0373), 'hit@50': np.float64(0.1762), 'ndcg@50': np.float64(0.0534), 'hit@80': np.float64(0.2373), 'ndcg@80': np.float64(0.0635)} 
+2025-05-30 11:07:29.733 | INFO     | trainer:_train_one_epoch:119 - epoch 5 1087.24s Train loss is [0.0635] 
+2025-05-30 11:07:40.804 | INFO     | trainer:_train_one_epoch:127 - validate 5 cost time 11.07s, result: {'hit@10': np.float64(0.0078), 'ndcg@10': np.float64(0.0037), 'hit@20': np.float64(0.0132), 'ndcg@20': np.float64(0.005), 'hit@50': np.float64(0.0282), 'ndcg@50': np.float64(0.008), 'hit@80': np.float64(0.0394), 'ndcg@80': np.float64(0.0098)} 
+2025-05-30 11:07:46.603 | INFO     | trainer:_train_one_epoch:135 - test 5 cost time 5.80s, result: {'hit@10': np.float64(0.0576), 'ndcg@10': np.float64(0.029), 'hit@20': np.float64(0.0934), 'ndcg@20': np.float64(0.038), 'hit@50': np.float64(0.1735), 'ndcg@50': np.float64(0.0537), 'hit@80': np.float64(0.2352), 'ndcg@80': np.float64(0.064)} 
+2025-05-30 11:26:12.719 | INFO     | trainer:_train_one_epoch:119 - epoch 6 1106.11s Train loss is [0.0586] 
+2025-05-30 11:26:23.614 | INFO     | trainer:_train_one_epoch:127 - validate 6 cost time 10.89s, result: {'hit@10': np.float64(0.009), 'ndcg@10': np.float64(0.0041), 'hit@20': np.float64(0.0161), 'ndcg@20': np.float64(0.0059), 'hit@50': np.float64(0.0321), 'ndcg@50': np.float64(0.0091), 'hit@80': np.float64(0.0448), 'ndcg@80': np.float64(0.0111)} 
+2025-05-30 11:26:28.916 | INFO     | trainer:_train_one_epoch:135 - test 6 cost time 5.30s, result: {'hit@10': np.float64(0.0568), 'ndcg@10': np.float64(0.028), 'hit@20': np.float64(0.094), 'ndcg@20': np.float64(0.0373), 'hit@50': np.float64(0.1754), 'ndcg@50': np.float64(0.0533), 'hit@80': np.float64(0.2369), 'ndcg@80': np.float64(0.0635)} 
+2025-05-30 11:46:30.514 | INFO     | trainer:_train_one_epoch:119 - epoch 7 1201.60s Train loss is [0.0544] 
+2025-05-30 11:46:51.399 | INFO     | trainer:_train_one_epoch:127 - validate 7 cost time 20.88s, result: {'hit@10': np.float64(0.0089), 'ndcg@10': np.float64(0.0043), 'hit@20': np.float64(0.0161), 'ndcg@20': np.float64(0.0061), 'hit@50': np.float64(0.0333), 'ndcg@50': np.float64(0.0095), 'hit@80': np.float64(0.0465), 'ndcg@80': np.float64(0.0117)} 
+2025-05-30 11:47:01.789 | INFO     | trainer:_train_one_epoch:135 - test 7 cost time 10.39s, result: {'hit@10': np.float64(0.0519), 'ndcg@10': np.float64(0.0251), 'hit@20': np.float64(0.0896), 'ndcg@20': np.float64(0.0346), 'hit@50': np.float64(0.1764), 'ndcg@50': np.float64(0.0516), 'hit@80': np.float64(0.2391), 'ndcg@80': np.float64(0.0621)} 
+2025-05-30 12:09:22.174 | INFO     | trainer:_train_one_epoch:119 - epoch 8 1340.38s Train loss is [0.0498] 
+2025-05-30 12:09:40.999 | INFO     | trainer:_train_one_epoch:127 - validate 8 cost time 18.82s, result: {'hit@10': np.float64(0.0093), 'ndcg@10': np.float64(0.0044), 'hit@20': np.float64(0.0173), 'ndcg@20': np.float64(0.0064), 'hit@50': np.float64(0.0334), 'ndcg@50': np.float64(0.0095), 'hit@80': np.float64(0.047), 'ndcg@80': np.float64(0.0118)} 
+2025-05-30 12:09:51.121 | INFO     | trainer:_train_one_epoch:135 - test 8 cost time 10.12s, result: {'hit@10': np.float64(0.053), 'ndcg@10': np.float64(0.0259), 'hit@20': np.float64(0.0913), 'ndcg@20': np.float64(0.0355), 'hit@50': np.float64(0.175), 'ndcg@50': np.float64(0.052), 'hit@80': np.float64(0.2356), 'ndcg@80': np.float64(0.0621)} 
+2025-05-30 12:32:20.054 | INFO     | trainer:_train_one_epoch:119 - epoch 9 1348.93s Train loss is [0.0476] 
+2025-05-30 12:32:42.844 | INFO     | trainer:_train_one_epoch:127 - validate 9 cost time 22.79s, result: {'hit@10': np.float64(0.0092), 'ndcg@10': np.float64(0.0043), 'hit@20': np.float64(0.0165), 'ndcg@20': np.float64(0.0061), 'hit@50': np.float64(0.0322), 'ndcg@50': np.float64(0.0093), 'hit@80': np.float64(0.0471), 'ndcg@80': np.float64(0.0117)} 
+2025-05-30 12:32:53.999 | INFO     | trainer:_train_one_epoch:135 - test 9 cost time 11.15s, result: {'hit@10': np.float64(0.0522), 'ndcg@10': np.float64(0.0247), 'hit@20': np.float64(0.09), 'ndcg@20': np.float64(0.0342), 'hit@50': np.float64(0.169), 'ndcg@50': np.float64(0.0498), 'hit@80': np.float64(0.2318), 'ndcg@80': np.float64(0.0602)} 
+2025-05-30 12:32:54.000 | INFO     | trainer:train_model:88 - training end, best iteration 4, results: {'hit@10': np.float64(0.0077), 'ndcg@10': np.float64(0.0034), 'hit@20': np.float64(0.0124), 'ndcg@20': np.float64(0.0045), 'hit@50': np.float64(0.0273), 'ndcg@50': np.float64(0.0075), 'hit@80': np.float64(0.0415), 'ndcg@80': np.float64(0.0098)}
+2025-05-30 12:32:54.000 | INFO     | trainer:train_model:91 - final test result is:  {'hit@10': np.float64(0.0583), 'ndcg@10': np.float64(0.0282), 'hit@20': np.float64(0.0947), 'ndcg@20': np.float64(0.0373), 'hit@50': np.float64(0.1762), 'ndcg@50': np.float64(0.0534), 'hit@80': np.float64(0.2373), 'ndcg@80': np.float64(0.0635)}
+2025-05-30 12:32:54.000 | INFO     | __main__:<module>:107 - train end total cost time: 10662.96731209755
