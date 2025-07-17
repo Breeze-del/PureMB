@@ -60,15 +60,15 @@ if __name__ == '__main__':
     parser.add_argument('--device', type=str, default='cuda:0', help='')
 
     args = parser.parse_args()
-    if args.data_name == 'tmall':
-        args.data_path = './data/Tmall'
-        args.behaviors = ['click', 'collect', 'cart', 'buy']
-    elif args.data_name == 'yelp':
+    if args.data_name == 'yelp':
         args.data_path = './data/Yelp'
         args.behaviors = ['tip', 'neutral', 'neg', 'pos']
     elif args.data_name == 'ml':
         args.data_path = './data/ML10M'
         args.behaviors = ['neutral', 'neg', 'pos']
+    elif args.data_name == 'tmall':
+        args.data_path = './data/Tmall'
+        args.behaviors = ['click', 'collect', 'cart', 'buy']
     else:
         raise Exception('data_name cannot be None')
 
