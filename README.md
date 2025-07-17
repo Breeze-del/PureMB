@@ -14,7 +14,7 @@ then, please create a new folder named 'check_point' to save the check point fil
 
 you can run Tmall dataset with:
 
-`python3 main.py --data_name tmall`
+`python3 main.py --data_name yelp`
 
 Please refer to the log files in the `log/` folder for detailed parameter settings for each dataset.
 
