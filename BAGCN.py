@@ -19,7 +19,7 @@ class BAGCN(nn.Module):
         self.interaction_matrix = interaction_matrix
         self.A_adj_matrix = self._get_a_adj_matrix()
 
-        # 使用 nn.ModuleList 存储每一层的 Linear 层
+        
         self.node_linears = nn.ModuleList()
         self.rel_linears = nn.ModuleList()
 
@@ -29,15 +29,11 @@ class BAGCN(nn.Module):
 
 
     def _get_a_adj_matrix(self):
-        """构建归一化的邻接矩阵A~
-
-        Returns:
-            torch.sparse.FloatTensor: 归一化的稀疏邻接矩阵
-        """
+        
         n = self.user_count + self.item_count
         inter_matrix = self.interaction_matrix.tocoo()
 
-        # 构建对称邻接矩阵
+        
         rows = np.concatenate([inter_matrix.row, inter_matrix.col + self.user_count])
         cols = np.concatenate([inter_matrix.col + self.user_count, inter_matrix.row])
         A = sp.coo_matrix(
