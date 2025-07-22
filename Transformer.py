@@ -10,20 +10,20 @@ class DynamicChunkEncoder(nn.Module):
         self.embed_dim = embed_dim
         self.num_heads = num_heads
         self.head_dim = embed_dim // num_heads
-        self.min_chunk = min_chunk  # 最小分块大小
+        self.min_chunk = min_chunk  
 
-        # 注意力投影层
+        
         self.qkv_proj = nn.Linear(embed_dim, embed_dim * 3)
         self.attn_out = nn.Linear(embed_dim, embed_dim)
 
-        # FFN层（保留关键的全连接层）
+        
         self.ffn = nn.Sequential(
             nn.Linear(embed_dim, ffn_dim),
             nn.GELU(),
             nn.Linear(ffn_dim, embed_dim)
         )
 
-        # 正则化
+        
         self.norm1 = nn.LayerNorm(embed_dim)
         self.norm2 = nn.LayerNorm(embed_dim)
         self.dropout = nn.Dropout(dropout)
@@ -371,7 +371,7 @@ class LinearTransformer(nn.Module):
 
 
 #######################
-# 测试代码
+# text fuction
 #######################
 if __name__ == "__main__":
     in_dim = 64
@@ -392,5 +392,5 @@ if __name__ == "__main__":
 
     output = transformer(dummy_input)
 
-    print(f"输入维度: {dummy_input.shape}")
-    print(f"输出维度: {output.shape}")  #  torch.Size([100, 128])
+    print(f"input: {dummy_input.shape}")
+    print(f"output: {output.shape}")  #  torch.Size([100, 128])
